@@ -5,8 +5,10 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.plaf.PanelUI;
 
-
+/*Quiz è una classe che implementa l'interfaccia ActionListener, il che significa che deve fornire un'implementazione del metodo actionPerformed(ActionEvent e).*/
 public class Quiz implements ActionListener{
+
+   /* Nella classe Quiz, vengono dichiarate variabili per le domande (questions), le opzioni di risposta (options), le risposte corrette (answers), il punteggio corrente (correct_guesses), il numero totale di domande (total_questions), il tempo rimanente (seconds), e altre componenti dell'interfaccia grafica come pulsanti, etichette e campi di testo.*/
 
     String [] questions =    {
                                 "Which company created Java?",
@@ -64,6 +66,7 @@ public class Quiz implements ActionListener{
         }
     });
 
+    /*Nel costruttore Quiz(), viene inizializzata l'interfaccia grafica. Vengono create e configurate varie componenti Swing, tra cui un JFrame, un JTextField per mostrare il numero di domanda, una JTextArea per mostrare la domanda stessa, quattro JButton per le opzioni di risposta, JLabel per visualizzare il tempo rimanente, e così via.*/
 
     public Quiz() {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -183,6 +186,8 @@ public class Quiz implements ActionListener{
 
         nextQuestion();
     }
+
+    /*Il metodo nextQuestion() è utilizzato per passare alla domanda successiva. Verifica se ci sono altre domande da mostrare o se è arrivato alla fine del quiz. Se ci sono altre domande, imposta i testi delle componenti dell'interfaccia grafica con la domanda e le opzioni di risposta corrispondenti e avvia un timer di 10 secondi.*/
     public void nextQuestion(){
         if(index >= total_questions){
             results();
@@ -198,6 +203,7 @@ public class Quiz implements ActionListener{
         }
     }
 
+    /*Il metodo actionPerformed(ActionEvent e) viene chiamato quando l'utente fa clic su uno dei pulsanti delle opzioni di risposta (A, B, C, D). Disabilita i pulsanti per impedire ulteriori clic e verifica se la risposta dell'utente è corretta rispetto alla risposta memorizzata nell'array answers. Incrementa il punteggio se la risposta è corretta e chiama displayAnswer() per mostrare la risposta corretta.*/
     @Override
     public void actionPerformed(ActionEvent e) {
         buttonA.setEnabled(false);
@@ -231,6 +237,8 @@ public class Quiz implements ActionListener{
         }
         displayAnswer();
     }
+
+   /* Il metodo displayAnswer() ferma il timer, disabilita i pulsanti delle opzioni di risposta e cambia il colore delle etichette delle opzioni di risposta per mostrare la risposta corretta. Dopo una pausa di 2 secondi, ripristina il colore delle etichette, reimposta il timer, abilita i pulsanti e passa alla prossima domanda.*/
     public void displayAnswer(){
 
         timer.stop();
@@ -271,6 +279,8 @@ public class Quiz implements ActionListener{
         pause.setRepeats(false);
         pause.start();
     }
+
+    /*Il metodo results() mostra i risultati finali del quiz quando sono state risposte tutte le domande. Disabilita i pulsanti delle opzioni di risposta, imposta il testo per visualizzare il punteggio e la percentuale di risposte corrette, e li aggiunge all'interfaccia grafica.*/
     public void results(){
 
         buttonA.setEnabled(false);
